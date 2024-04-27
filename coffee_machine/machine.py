@@ -1,3 +1,5 @@
+from random import randint
+
 MENU = {
     "espresso": {
         "ingredients": {
@@ -23,9 +25,15 @@ MENU = {
         "cost": 3.0,
     },
 }
-
+coins_in_the_machine = {
+    "quarters": 10,
+    "dimes": 10,
+    "nickles": 20,
+    "pennies": 20,
+}
+coffee_nums = {"1": "espresso", "2": "latte", "3": "cappuccino"}
 resources = {
-    "water": 300,
-    "milk": 200,
-    "coffee": 100,
+    "water": randint(0, 1000),
+    "milk": randint(0, 1000),
+    "coffee": randint(0, 1000),
 }

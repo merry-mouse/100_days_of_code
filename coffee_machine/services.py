@@ -1,48 +1,9 @@
-from random import randint
-
-MENU = {
-    "espresso": {
-        "ingredients": {
-            "water": 50,
-            "coffee": 18,
-        },
-        "cost": 1.5,
-    },
-    "latte": {
-        "ingredients": {
-            "water": 200,
-            "milk": 150,
-            "coffee": 24,
-        },
-        "cost": 2.5,
-    },
-    "cappuccino": {
-        "ingredients": {
-            "water": 250,
-            "milk": 100,
-            "coffee": 24,
-        },
-        "cost": 3.0,
-    },
-}
-resources = {
-    "water": randint(0, 1000),
-    "milk": randint(0, 1000),
-    "coffee": randint(0, 1000),
-}
-
-coffee_nums = {"1": "espresso", "2": "latte", "3": "cappuccino"}
-
-
 def greeting():
     print("Welcome! What drink would you like to have today?\n")
     print("Print 1 for espresso; 2 for latte; 3 for cappuccino\n")
 
 
-greeting()
-
-
-def ask_for_a_drink() -> str:
+def ask_for_a_drink(coffee_nums) -> str:
     while True:
         coffee_choice = input("Choose 1, 2 or 3: ")
         if coffee_choice in coffee_nums.keys():
@@ -54,35 +15,20 @@ def ask_for_a_drink() -> str:
             )
 
 
-user_coffee_choice = ask_for_a_drink()
-
-
-def check_resourses(user_coffee_choice):
-    drink_name = coffee_nums[user_coffee_choice]
-    drink_ingridients = MENU[drink_name]["ingredients"]
+def check_resourses(drink_name, menu, resources):
+    drink_ingridients = menu[drink_name]["ingredients"]
 
     for ingridient, amount_required in drink_ingridients.items():
         if resources[ingridient] < amount_required:
             print(f"Sorry, there is not enough {ingridient} for {drink_name}.")
+            print("Try another drik.")
             return False
         else:
             return True
 
 
-are_there_enough_resourses = check_resourses(user_coffee_choice)
-
-coins_in_the_machine = {
-    "quarters": 50,
-    "dimes": 50,
-    "nickles": 50,
-    "pennies": 50,
-}
-print(f"coins_in_the_machine: {coins_in_the_machine}")
-
-
-def process_coins_until_enough_inserted(user_coffee_choice):
-    drink_name = coffee_nums[user_coffee_choice]
-    price_for_chosen_drink = MENU[drink_name]["cost"]
+def process_coins_until_enough_inserted(drink_name, coins_in_the_machine, menu):
+    price_for_chosen_drink = menu[drink_name]["cost"]
     print(f"{drink_name} costs ${price_for_chosen_drink}. Please insert coins.")
 
     total_inserted = 0
@@ -125,13 +71,8 @@ def process_coins_until_enough_inserted(user_coffee_choice):
                 return 0
 
 
-user_coins = process_coins_until_enough_inserted(user_coffee_choice)
-print(f"COINS AFTER INSERT: {coins_in_the_machine}")
-
-
-def calculate_change(user_coins):
-    drink_name = coffee_nums[user_coffee_choice]
-    price_for_chosen_drink = MENU[drink_name]["cost"]
+def calculate_change(user_coins, drink_name, menu):
+    price_for_chosen_drink = menu[drink_name]["cost"]
     change = user_coins - price_for_chosen_drink
     change_in_cents = round(change * 100)
 
@@ -154,9 +95,6 @@ def calculate_change(user_coins):
     }
 
 
-dict_of_coins_to_return = calculate_change(user_coins)
-
-
 def updating_coins_in_the_machine(
     coins_in_the_machine,
     dict_of_coins_to_return,
@@ -164,9 +102,3 @@ def updating_coins_in_the_machine(
     for coin_type, num_to_return in dict_of_coins_to_return.items():
         coins_in_the_machine[coin_type] -= num_to_return
     return coins_in_the_machine
-
-
-updated_coins_in_the_machine = updating_coins_in_the_machine(
-    coins_in_the_machine, dict_of_coins_to_return
-)
-print(f"Coins after giving change back = {coins_in_the_machine}")
