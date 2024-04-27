@@ -29,4 +29,4 @@ if __name__ == "__main__":
             coins_in_current_machine,
             dict_of_coins_to_return,
         )
-        print(f"Here is your change and coffeee ({drink_name})")
+        print(f"Here is your change and ({drink_name})")
