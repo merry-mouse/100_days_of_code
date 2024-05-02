@@ -14,6 +14,16 @@ class CoffeeMaker:
         for resource, amount in self.resources.items():
             print(f"{resource}: {amount} ml/g")
 
+    def user_cofee_choice(self):
+        """Saves users cofee_choice"""
+        print("Greetings! Which coffee would you like to drink?")
+        print("Choose 1 for latte, 2 for espresso and 3 for cappuccino")
+        user_choice = int(input("Choose a number: "))
+        if user_choice in (1, 2, 3):
+            return user_choice
+        print("You need to write a number 1/2/3. Try again.")
+        return False
+
     def is_resource_sufficient(self, drink):
         """Returns True when order is possible"""
         can_make = True
