@@ -18,10 +18,18 @@ class CoffeeMaker:
         """Saves users cofee_choice"""
         print("Greetings! Which coffee would you like to drink?")
         print("Choose 1 for latte, 2 for espresso and 3 for cappuccino")
-        user_choice = int(input("Choose a number: "))
-        if user_choice in (1, 2, 3):
-            return user_choice
-        print("You need to write a number 1/2/3. Try again.")
+        user_choice = input("Choose a number: ")
+        if user_choice in ("1", "2", "3"):
+            if user_choice == "1":
+                print("You choose latte.")
+                return "latte"
+            elif user_choice == "2":
+                print("You choose espresso.")
+                return "espresso"
+            else:
+                print("You choose cappuccino.")
+                return "cappuccino"
+        print("You need to write a number 1,2 or3. Try again.")
         return False
 
     def is_resource_sufficient(self, drink):

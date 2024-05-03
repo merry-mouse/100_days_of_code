@@ -12,3 +12,9 @@ class Menu:
             MenuItem(name="espresso", water=50, milk=0, coffee=18, cost=1.5),
             MenuItem(name="cappucino", water=250, milk=50, coffee=24, cost=3),
         ]
+
+    def find_drink(self, choice):
+        """Searches for a dring object by name"""
+        for item in self.menu:
+            if item.name == choice:
+                return item
