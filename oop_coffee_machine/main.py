@@ -18,3 +18,4 @@ if __name__ == "__main__":
             if our_money_machine.make_payments(drink_menu_object.cost):
                 our_cofee_maker.make_coffee(drink_menu_object)
                 our_money_machine.report()
+                our_cofee_maker.report()
