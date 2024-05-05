@@ -9,13 +9,18 @@ class QuizBrain:
         q_answer = self.question_list[self.question_number].answer
         self.question_number += 1
         user_answer = input(f"Q.{self.question_number}: {q_text} (True/False t/f)?: ")
-        print(f"Right answer is {q_answer}.")
         if self.check_answer(user_answer, q_answer) is True:
             self.score += 1
-        print(f"Score: {self.score}/{self.question_number}")
+            print("That's right!")
+        print(f"Right answer is {q_answer}.")
+        print(f"Score: {self.score}/{self.question_number}\n")
 
     def still_has_questions(self):
         return self.question_number < len(self.question_list)
 
     def check_answer(self, user_answer, right_answer):
         return user_answer[0].lower() == right_answer[0].lower()
+
+    def final(self):
+        print("You've completed the quiz!")
+        print(f"Your final score is {self.score}/{self.question_number}.\n")
